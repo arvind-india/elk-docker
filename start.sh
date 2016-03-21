@@ -74,6 +74,13 @@ else
   OUTPUT_LOGFILES+="/var/log/logstash/logstash.log "
 fi
 
+# Install Watcher plugin for Elasticsearch
+/usr/share/elasticsearch/bin/plugin install elasticsearch/license/latest
+/usr/share/elasticsearch/bin/plugin install -b elasticsearch/watcher/latest
+
+curl -X PUT 'http://localhost:9200/_watcher/watch/500_detection' -d @500_watch
+curl -X PUT 'http://localhost:9200/_watcher/watch/slow_requests_detection' -d @slow_requests_watch
+
 # Kibana
 if [ -z "$KIBANA_START" ]; then
   KIBANA_START=1
