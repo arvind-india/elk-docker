@@ -78,6 +78,21 @@ fi
 /usr/share/elasticsearch/bin/plugin install elasticsearch/license/latest
 /usr/share/elasticsearch/bin/plugin install -b elasticsearch/watcher/latest
 
+cat <<EMAILCONF >> /etc/elasticsearch/elasticsearch.yml
+watcher.actions.email.service.account:
+  work:
+    profile: gmail
+    email_defaults:
+      from: 'John Doe <john.doe@host.domain>'
+    smtp:
+      auth: true
+      starttls.enable: true
+      host: smtp.gmail.com
+      port: 587
+      user: <username>
+      password: <password>
+EMAILCONF
+
 curl -X PUT 'http://localhost:9200/_watcher/watch/500_detection' -d @500_watch
 curl -X PUT 'http://localhost:9200/_watcher/watch/slow_requests_detection' -d @slow_requests_watch
 
