@@ -80,7 +80,7 @@ ADD ./elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
 ### configure Logstash
 
 # filters
-
+ADD ./logstash.conf /etc/logstash/conf.d/logstash.conf
 
 ###############################################################################
 #                                   START
