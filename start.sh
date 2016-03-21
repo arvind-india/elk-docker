@@ -25,7 +25,7 @@ trap _term SIGTERM
 
 
 ## remove pidfiles in case previous graceful termination failed
-# NOTE - This is the reason for the WARNING at the top - it's a bit hackish, 
+# NOTE - This is the reason for the WARNING at the top - it's a bit hackish,
 #   but if it's good enough for Fedora (https://goo.gl/88eyXJ), it's good
 #   enough for me :)
 
