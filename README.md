@@ -1,30 +1,40 @@
-# Elasticsearch, Logstash, Kibana (ELK) Docker image
+# Elasticsearch, Logstash, Kibana (ELK) and Watcher Docker image
 
-[![](https://badge.imagelayers.io/sebp/elk:latest.svg)](https://imagelayers.io/?images=sebp/elk:latest 'Get your own badge on imagelayers.io')
+I forked this Docker image and modified to work with **ELK and Watcher**.
+I remove all the unnecessary files for my purpose and added new configuration
+files. For [Logstash](https://github.com/lcostantini/elk-docker/blob/master/logstash.conf)
+and Watcher to detect multiple [HTTP 500](https://github.com/lcostantini/elk-docker/blob/master/500_watch)
+and [slow responses](https://github.com/lcostantini/elk-docker/blob/master/slow_requests_watch).
 
-This Docker image provides a convenient centralised log server and log management web interface, by packaging Elasticsearch, Logstash, and Kibana, collectively known as ELK.
+The image is used with [this](https://github.com/lcostantini/anomaly-detection) application to work in Bluemix.
 
-The following tags are available:
+# Using Docker image in localhost
+First you need to clone this repository.
+Then build the image
+```
+docker build -t lcostantini/elk .
+```
 
-- `es221_l222_k442`, `latest`: Elasticsearch 2.2.1, Logstash 2.2.2, and Kibana 4.4.2.
+And tested locally
+```
+docker run -p 5601:5601 -p 9200:9200 -p 5000:5000 -it --name elk lcostantini/elk
+```
 
-- `es220_l222_k441`: Elasticsearch 2.2.0, Logstash 2.2.2, and Kibana 4.4.1.
+# Using Docker image in Bluemix
+First you need to install the IBM Containers plug-in for Cloud Foundry, you can see
+[here](https://console.ng.bluemix.net/docs/containers/container_cli_ov.html#container_cli_cfic_install)
+how to install.
+Then you need to build the image in Bluemix with the command:
+```
+cf ic build -t registry.ng.bluemix.net/NAMESPACE/elk .
+```
 
-- `es220_l220_k440`: Elasticsearch 2.2.0, Logstash 2.2.0, and Kibana 4.4.0.
+You can see the image in Bluemix with
+```
+cf ic images
+```
 
-- `E1L1K4`: Elasticsearch 1.7.3, Logstash 1.5.5, and Kibana 4.1.2.
-
-**Note** – See the documentation page for more information on pulling specific combinations of versions of Elasticsearch, Logstash and Kibana.
-
-### Documentation
-
-See the [ELK Docker image documentation web page](http://elk-docker.readthedocs.org/) for complete instructions on how to use this image.
-
-### Docker Hub
-
-This image is hosted on Docker Hub at [https://hub.docker.com/r/sebp/elk/](https://hub.docker.com/r/sebp/elk/).
+Now in the Bluemix dashboard you can see how to start a new container and follow the instructions there.
 
 ### About
-
 Written by [Sébastien Pujadas](https://pujadas.net), released under the [Apache 2 license](https://www.apache.org/licenses/LICENSE-2.0).
-
