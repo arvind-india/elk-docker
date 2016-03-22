@@ -9,7 +9,9 @@
 
 FROM phusion/baseimage
 MAINTAINER Sebastien Pujadas http://pujadas.net
-ENV REFRESHED_AT 2016-03-04
+
+# Let the conatiner know that there is no tty
+ENV DEBIAN_FRONTEND "noninteractive"
 
 ###############################################################################
 #                                INSTALLATION
